@@ -214,13 +214,7 @@ function eventRender(event, element, view) {
                     $(element)
                     .find(".fc-event-time")
                     .before('<span class="small-icon linked"></span><span class="small-icon show-empty"></span>');
-                   // in theory a linked show shouldn't have an automatic playlist so adding this here
-                } else if (event.show_has_auto_playlist === true) {
-                    $(element)
-                        .find(".fc-event-time")
-                        .before('<span class="small-icon autoplaylist"></span><span class="small-icon show-empty"></span>');
-                }
-                    else {
+                } else {
                     $(element)
                         .find(".fc-event-time")
                         .before('<span class="small-icon show-empty"></span>');
@@ -230,11 +224,7 @@ function eventRender(event, element, view) {
                     $(element)
                         .find(".fc-event-time")
                         .before('<span class="small-icon linked"></span><span class="small-icon show-partial-filled"></span>');
-                } else if (event.show_has_auto_playlist === true) {
-                $(element)
-                    .find(".fc-event-time")
-                    .before('<span class="small-icon autoplaylist"></span><span class="small-icon show-partial-filled"></span>');
-            } else {
+                } else {
                     $(element)
                         .find(".fc-event-time")
                         .before('<span class="small-icon show-partial-filled"></span>');
@@ -244,38 +234,26 @@ function eventRender(event, element, view) {
                     $(element)
                         .find(".fc-event-time")
                         .before('<span class="small-icon linked"></span>');
-                } else if (event.show_has_auto_playlist === true) {
-                $(element)
-                    .find(".fc-event-time")
-                    .before('<span class="small-icon autoplaylist"></span>');
                 }
             }
         } else if (view.name === 'month') {
             if (event.show_empty === 1) {
                 if (event.linked) {
-                     $(element)
+                    $(element)
                         .find(".fc-event-title")
                         .after('<span class="small-icon linked"></span><span title="'+$.i18n._("Show is empty")+'" class="small-icon show-empty"></span>');
-                } else if (event.show_has_auto_playlist === true) {
-                     $(element)
-                        .find(".fc-event-title")
-                        .after('<span title="'+$.i18n._("Show has an automatic playlist")+'"class="small-icon autoplaylist"></span><span title="'+$.i18n._("Show is empty")+'" class="small-icon show-empty"></span>');
                 } else {
-                     $(element)
+                    $(element)
                         .find(".fc-event-title")
                         .after('<span title="'+$.i18n._("Show is empty")+'" class="small-icon show-empty"></span>');
                 }
             } else if (event.show_partial_filled === true) {
                 if (event.linked) {
                     $(element)
-                        .find(".fc-event-title")
-                        .after('<span class="small-icon linked"></span><span title="' + $.i18n._("Show is partially filled") + '" class="small-icon show-partial-filled"></span>');
-                } else if (event.show_has_auto_playlist === true) {
-                     $(element)
-                        .find(".fc-event-title")
-                        .after('<span title="'+$.i18n._("Show has an automatic playlist")+'"class="small-icon autoplaylist"></span><span title="'+$.i18n._("Show is partially filled")+'" class="small-icon show-partial-filled"></span>');
+                    .find(".fc-event-title")
+                    .after('<span class="small-icon linked"></span><span title="'+$.i18n._("Show is partially filled")+'" class="small-icon show-partial-filled"></span>');
                 } else {
-                     $(element)
+                    $(element)
                         .find(".fc-event-title")
                         .after('<span title="'+$.i18n._("Show is partially filled")+'" class="small-icon show-partial-filled"></span>');
                 }
@@ -284,10 +262,6 @@ function eventRender(event, element, view) {
                     $(element)
                         .find(".fc-event-title")
                         .after('<span class="small-icon linked"></span>');
-                } else if (event.show_has_auto_playlist === true) {
-                    $(element)
-                        .find(".fc-event-title")
-                        .after('<span class="small-icon autoplaylist"></span>');
                 }
             }
         }

@@ -237,6 +237,8 @@ SQL;
         $ts = intval($this->_showInstance->getDbLastScheduled("U")) ? : 0;
         $id = $this->_showInstance->getDbId();
         $lastid = $this->getLastAudioItemId();
+//        Logging::info("The last id is $lastid");
+
         $scheduler = new Application_Model_Scheduler($checkUserPerm);
         $scheduler->scheduleAfter(
             array(array("id" => $lastid, "instance"  => $id, "timestamp" => $ts)),
@@ -288,7 +290,6 @@ SQL;
     }
 
     private function checkToDeleteShow($showId)
-
     {
         //UTC DateTime object
         $showsPopUntil = Application_Model_Preference::GetShowsPopulatedUntil();
@@ -553,26 +554,6 @@ SQL;
         }
 
         return $isFilled;
-    }
-
-    public static function getShowHasAutoplaylist($p_start, $p_end)
-    {
-        $con = Propel::getConnection(CcShowInstancesPeer::DATABASE_NAME);
-        $con->beginTransaction();
-        try {
-            // query the show instances to find whether a show instance has an autoplaylist
-            $showInstances = CcShowInstancesQuery::create()
-                ->filterByDbEnds($p_end->format(DEFAULT_TIMESTAMP_FORMAT), Criteria::LESS_THAN)
-                ->filterByDbStarts($p_start->format(DEFAULT_TIMESTAMP_FORMAT), Criteria::GREATER_THAN)
-                ->leftJoinCcShow()
-                ->find($con);
-            return $showInstances;
-        }
-        catch (Exception $e) {
-            $con->rollback();
-            Logging::info("Couldn't query show instances for calendar to find which had autoplaylists");
-            Logging::info($e->getMessage());
-        }
     }
 
     public function showEmpty()
